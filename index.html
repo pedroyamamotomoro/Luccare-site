@@ -409,7 +409,6 @@ section{padding:clamp(4rem,7.5vw,6.8rem) 6vw}
 .proc-grupo li::before{content:'';position:absolute;left:0;top:.95em;width:6px;height:6px;border-radius:50%;background:var(--pastel-pink)}
 .proc-grupo li span{display:block;font-size:.79rem;color:#8d8d8d}
 
-#tratamentos{background:#fff}
 .services-intro{max-width:640px;margin-bottom:3.2rem}
 .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.5rem}
 .service-card{background:var(--cream);border-radius:24px;padding:2.2rem;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
@@ -1117,8 +1116,25 @@ body.kids .cookie-aviso,body.menu-aberto .cookie-aviso{display:none}
   .cookie-btns button{flex:1 1 0}
   /* o aviso não pode tapar o botão do WhatsApp */
   body.cookie-visivel .whatsapp-float{bottom:calc(var(--cookie-h,110px) + 1.3rem)}
+  body.cookie-visivel .instagram-float{bottom:calc(var(--cookie-h,110px) + 1.3rem + 58px + .55rem)}
 }
 @media(prefers-reduced-motion:reduce){.cookie-aviso{animation:none}}
+
+/* Instagram flutuante: de propósito menor e mais discreto que o WhatsApp.
+   Agendar é o que importa; o Instagram é o segundo caminho.
+   ATENÇÃO: estas regras são de nível raiz. Já entraram uma vez dentro do
+   @media(max-width:620px) acima e o botão só aparecia no celular. */
+.instagram-float{position:fixed;bottom:calc(2rem + 58px + .55rem);right:calc(2rem + 7px);
+  z-index:249;width:44px;height:44px;border-radius:50%;background:#fff;
+  border:1px solid rgba(73,79,75,.16);display:flex;align-items:center;justify-content:center;
+  text-decoration:none;box-shadow:0 4px 14px rgba(43,43,43,.12);
+  transition:transform .2s,background .25s,border-color .25s}
+.instagram-float svg{width:21px;height:21px;fill:var(--dark-gray);transition:fill .25s}
+.instagram-float:hover{transform:scale(1.08);border-color:transparent;
+  background:linear-gradient(45deg,#f9ce34 0%,#ee2a7b 55%,#6228d7 100%)}
+.instagram-float:hover svg{fill:#fff}
+.instagram-float:focus-visible{outline:2px solid var(--dark-gray);outline-offset:3px}
+body.kids .instagram-float,body.menu-aberto .instagram-float{display:none}
 </style>
 <script type="application/ld+json">
 {
@@ -1154,6 +1170,9 @@ body.kids .cookie-aviso,body.menu-aberto .cookie-aviso{display:none}
     { "@type": "MedicalProcedure", "name": "Ortodontia" },
     { "@type": "MedicalProcedure", "name": "Ortopedia Funcional dos Maxilares" },
     { "@type": "MedicalProcedure", "name": "Alinhadores Invisalign" },
+    { "@type": "MedicalProcedure", "name": "Restaurações" },
+    { "@type": "MedicalProcedure", "name": "Endodontia" },
+    { "@type": "MedicalProcedure", "name": "Exodontia" },
     { "@type": "MedicalProcedure", "name": "Periodontia" },
     { "@type": "MedicalProcedure", "name": "Prótese dentária" },
     { "@type": "MedicalProcedure", "name": "Clareamento dental" }
@@ -1206,7 +1225,6 @@ body.kids .cookie-aviso,body.menu-aberto .cookie-aviso{display:none}
     <a href="#sobre">A clínica</a>
     <a href="#fases">Especialidades</a>
     <a href="#odontopediatria">Odontopediatria</a>
-    <a href="#tratamentos">Tratamentos</a>
     <a href="#invisalign">Invisalign</a>
     <a href="#diferenciais">Princípios</a>
     <a href="#equipe">Equipe</a>
@@ -1224,7 +1242,7 @@ body.kids .cookie-aviso,body.menu-aberto .cookie-aviso{display:none}
     <p>Cada consulta é planejada de acordo com a idade, as necessidades e o ritmo de cada paciente, em um ambiente acolhedor e preparado para toda a família.</p>
     <div class="hero-acoes">
       <a data-track="whatsapp" data-location="hero" href="https://wa.me/5511945522645?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta%20na%20LUCCARE." class="btn-primary" target="_blank" rel="noopener">Agendar pelo WhatsApp</a>
-      <a href="#tratamentos" class="btn-secondary">Conheça nossos tratamentos</a>
+      <a href="#fases" class="btn-secondary">Conheça nossos tratamentos</a>
     </div>
   </div>
   <div class="hero-vis">
@@ -1334,30 +1352,11 @@ body.kids .cookie-aviso,body.menu-aberto .cookie-aviso{display:none}
     <div class="proc-cols">
       <div class="proc-grupo"><h5>Prevenção e acompanhamento</h5><ul>
         <li>Pré-natal odontológico</li><li>Profilaxia e orientações de prevenção</li><li>Aplicação de flúor e selantes, quando indicados</li><li>Manejo comportamental individualizado</li></ul></div>
+      <div class="proc-grupo"><h5>Tratamentos</h5><ul>
+        <li>Restaurações</li><li>Endodontia <span>tratamento de canal</span></li><li>Exodontia <span>extração dentária</span></li><li>Procedimentos cirúrgicos</li></ul></div>
       <div class="proc-grupo"><h5>Recursos e ortodontia</h5><ul>
         <li>Sedação com óxido nitroso</li><li>Aplicação de laser</li><li>Ortodontia preventiva e interceptiva</li><li>Ortodontia corretiva</li></ul></div>
     </div>
-  </div>
-</section>
-
-<section id="tratamentos">
-  <div class="services-intro">
-    <span class="rotulo">Tratamentos</span>
-    <p class="subtitulo">Cada fase da vida tem necessidades diferentes. Por isso, organizamos nossos tratamentos para facilitar a escolha do cuidado mais adequado para cada paciente.</p>
-  </div>
-  <div class="services-grid">
-    <div class="service-card"><div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.5c-1.8-1.6-4-2-5.6-.9C4.4 5.9 4 8.6 4.6 11c.5 2 1 4 1.4 6 .3 1.4 1.9 1.7 2.5.5.5-1 .8-2.2 1.2-3.2.3-.9 1.3-.9 1.6 0 .4 1 .7 2.2 1.2 3.2.6 1.2 2.2.9 2.5-.5.4-2 .9-4 1.4-6 .6-2.4.2-5.1-1.8-6.4-1.6-1.1-3.8-.7-5.6.9z"/></svg></div>
-      <h3>Crianças</h3><p>Acompanhamento desde os primeiros meses de vida, com atenção à prevenção, ao desenvolvimento e à adaptação ao atendimento odontológico.</p>
-      <ul><li>Odontopediatria e primeira consulta</li><li>Prevenção, flúor e selantes</li><li>Restaurações infantis</li><li>Ortodontia preventiva e interceptiva</li><li>Ortopedia Funcional dos Maxilares</li></ul>
-      <span class="service-tag">Especialidade da clínica</span></div>
-    <div class="service-card"><div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16"/><path d="M4 16h16"/><rect x="6.5" y="5.5" width="4" height="5" rx="1"/><rect x="13.5" y="13.5" width="4" height="5" rx="1"/></svg></div>
-      <h3>Adolescentes e adultos</h3><p>Tratamentos ortodônticos planejados de acordo com as necessidades, objetivos e características de cada paciente.</p>
-      <ul><li>Avaliação e planejamento ortodôntico</li><li>Aparelhos ortodônticos convencionais</li><li>Alinhadores Invisalign</li><li>Acompanhamento do crescimento</li><li>Contenção e manutenção dos resultados</li></ul>
-      <span class="service-tag">Ortodontia</span></div>
-    <div class="service-card"><div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-9.5A4.5 4.5 0 0112 8a4.5 4.5 0 017 3.5c0 5.15-7 9.5-7 9.5z"/><path d="M9.5 11.5l1.8 1.8 3.2-3.2"/></svg></div>
-      <h3>Saúde bucal do adulto</h3><p>Enquanto cuidamos das crianças, também podemos cuidar de quem as acompanha.</p>
-      <ul><li>Consultas preventivas e periódicas</li><li>Clínica geral e restaurações</li><li>Periodontia e saúde gengival</li><li>Reabilitação oral e prótese</li><li>Procedimentos estéticos</li></ul>
-      <span class="service-tag">Toda a família</span></div>
   </div>
 </section>
 
@@ -1559,6 +1558,9 @@ body.kids .cookie-aviso,body.menu-aberto .cookie-aviso{display:none}
 </div>
 
 
+<a data-track="instagram" data-location="flutuante" href="https://www.instagram.com/luccareodontologia/" class="instagram-float" target="_blank" rel="noopener" aria-label="Instagram da LUCCARE">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a4 4 0 110-8 4 4 0 010 8z"/></svg>
+</a>
 <a data-track="whatsapp" data-location="flutuante" href="https://wa.me/5511945522645?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta%20na%20LUCCARE." class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.524 5.849L.057 23.996l6.305-1.654A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.67-.51-5.194-1.394l-.373-.22-3.742.981.999-3.649-.242-.375A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
 </a>
