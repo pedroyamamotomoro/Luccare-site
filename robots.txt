@@ -1,0 +1,14 @@
+# LUCCARE Odontologia
+User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+Sitemap: https://luccareodontologia.com.br/sitemap.xml
