@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<!-- Google Consent Mode v2 + Google Tag Manager -->
+<script>
+/* Mesma política do resto do site: o contêiner GTM-T7B4GD3L carrega sempre,
+   mas os quatro estados nascem 'denied' — as tags do Google rodam sem cookie
+   e sem identificador até o aceite. A escolha fica em
+   localStorage['luccare_cookies'], que é compartilhado com o site inteiro:
+   quem já decidiu lá não vê o aviso aqui, e vice-versa.
+   Aqui não há Modo Criança, então o bloqueio do Cantinho não se aplica. */
+(function(w,d){
+  var CHAVE='luccare_cookies';
+  w.dataLayer=w.dataLayer||[];
+  function gtag(){w.dataLayer.push(arguments);}
+  var esc=null;try{esc=localStorage.getItem(CHAVE);}catch(e){}
+  w.__gtmEscolha=esc;
+  var ok=(esc==='sim');
+  gtag('consent','default',{
+    ad_storage:        ok?'granted':'denied',
+    ad_user_data:      ok?'granted':'denied',
+    ad_personalization:ok?'granted':'denied',
+    analytics_storage: ok?'granted':'denied',
+    wait_for_update:500
+  });
+  gtag('set','ads_data_redaction',!ok);
+  w.dataLayer.push({event:'luccare_consentimento',
+    consentimento:ok?'aceito':(esc==='nao'?'recusado':'pendente')});
+  var NEGADO={ad_storage:'denied',ad_user_data:'denied',
+              ad_personalization:'denied',analytics_storage:'denied'};
+  var LIBERADO={ad_storage:'granted',ad_user_data:'granted',
+                ad_personalization:'granted',analytics_storage:'granted'};
+  w.__gtmAceitar=function(){
+    try{localStorage.setItem(CHAVE,'sim');}catch(e){}
+    w.__gtmEscolha='sim';
+    try{gtag('consent','update',LIBERADO);gtag('set','ads_data_redaction',false);
+      w.dataLayer.push({event:'luccare_consentimento',consentimento:'aceito'});}catch(e){}
+  };
+  w.__gtmRecusar=function(){
+    try{localStorage.setItem(CHAVE,'nao');}catch(e){}
+    w.__gtmEscolha='nao';
+    try{gtag('consent','update',NEGADO);gtag('set','ads_data_redaction',true);
+      w.dataLayer.push({event:'luccare_consentimento',consentimento:'recusado'});}catch(e){}
+  };
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(w,d,'script','dataLayer','GTM-T7B4GD3L');
+})(window,document);
+</script>
+<!-- End Google Tag Manager -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cartão virtual | LUCCARE Odontologia</title>
+<meta name="description" content="Atendimento odontológico infantil e adulto em Pinheiros. Agende pelo WhatsApp, siga no Instagram ou veja como chegar à LUCCARE Odontologia." />
+<link rel="canonical" href="https://luccareodontologia.com.br/cartao/" />
+<link rel="icon" type="image/png" href="../assets/favicon.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="LUCCARE Odontologia" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:url" content="https://luccareodontologia.com.br/cartao/" />
+<meta property="og:title" content="LUCCARE Odontologia | Atendimento odontológico infantil e adulto" />
+<meta property="og:description" content="Odontopediatria, clínico geral, Ortopedia Funcional dos Maxilares e Ortodontia em Pinheiros, São Paulo." />
+<meta property="og:image" content="https://luccareodontologia.com.br/assets/og-luccare.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="LUCCARE Odontologia | Atendimento odontológico infantil e adulto" />
+<meta name="twitter:description" content="Odontopediatria, clínico geral, Ortopedia Funcional dos Maxilares e Ortodontia em Pinheiros, São Paulo." />
+<meta name="twitter:image" content="https://luccareodontologia.com.br/assets/og-luccare.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --dark-gray:#494F4B;--pastel-blue:#acc2e8;--pastel-green:#b4d7b7;
+  --pastel-pink:#f9b1b4;--gold:#f6c06f;--cream:#f4f0de;
+  --arco:linear-gradient(90deg,#acc2e8 0%,#b4d7b7 33%,#f6c06f 66%,#f9b1b4 100%);
+  /* fundo medido no cartão do Canva */
+  --fundo:#FFFBF8;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--fundo);color:var(--dark-gray);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  min-height:100vh;display:flex;flex-direction:column}
+
+/* a faixa do arco-íris é a assinatura do site — é ela que costura os dois */
+.faixa{height:4px;background:var(--arco);flex:0 0 auto}
+
+.cartao{flex:1 1 auto;width:100%;max-width:440px;margin:0 auto;
+  padding:2.6rem 1.4rem 2rem;text-align:center}
+
+.logo{width:min(272px,78%);height:auto;display:block;margin:0 auto}
+/* "ODONTOLOGIA" em caixa alta espaçada, como no cartão do Canva.
+   O logo_color.png é só o wordmark; a linha de baixo vem por CSS. */
+.marca-sub{display:block;margin:.42rem auto 0;font-size:.82rem;font-weight:500;
+  letter-spacing:.42em;text-indent:.42em;text-transform:uppercase;
+  color:var(--dark-gray);opacity:.92}
+
+/* divisor —  ✦  — do cartão original */
+.divisor{display:flex;align-items:center;justify-content:center;gap:.8rem;
+  margin:1.5rem 0 1.9rem}
+.divisor i{display:block;width:34px;height:1.5px;background:#cfd8cf;border-radius:2px}
+.divisor svg{width:17px;height:17px;fill:var(--pastel-green)}
+
+h1{font-family:'Cormorant Garamond',serif;font-weight:400;
+  font-size:clamp(1.72rem,7.2vw,2.15rem);line-height:1.24;
+  margin:0 0 1.05rem;color:#2f3733;letter-spacing:.005em}
+.especialidades{font-size:.85rem;line-height:1.62;margin:0 0 2.3rem;
+  color:var(--dark-gray);opacity:.86;font-weight:400}
+
+/* ── os botões ────────────────────────────────────────────────── */
+.links{display:flex;flex-direction:column;gap:.85rem}
+.link{display:grid;grid-template-columns:46px 1fr 26px;align-items:center;
+  gap:.2rem;min-height:84px;padding:.9rem 1.15rem;border-radius:26px;
+  border:1.5px solid;text-decoration:none;color:var(--dark-gray);
+  transition:transform .18s ease,box-shadow .22s ease}
+.link:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(43,43,43,.09)}
+.link:active{transform:translateY(0)}
+.link:focus-visible{outline:2px solid var(--dark-gray);outline-offset:3px}
+.link .ic{display:flex;align-items:center;justify-content:center}
+.link .ic svg{width:27px;height:27px;display:block}
+.link .rot{font-size:.97rem;line-height:1.35;font-weight:400;
+  padding:0 .3rem;word-break:break-word}
+.link .seta{width:26px;height:26px;opacity:.55}
+.link .seta svg{width:100%;height:100%;fill:none;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round}
+
+.link.zap  {border-color:var(--pastel-green);background:#F2FAF4}
+.link.insta{border-color:var(--pastel-pink); background:#FDF4F5}
+.link.mapa {border-color:var(--pastel-blue); background:#F3F7FD}
+.link.site {border-color:#dcd7c7;           background:#FBF9F1}
+.link.star {border-color:var(--gold);        background:#FEF8EE}
+
+.link.zap   .seta svg{stroke:#8CC79A}
+.link.insta .seta svg{stroke:#EE9BA5}
+.link.mapa  .seta svg{stroke:#8FAADC}
+.link.site  .seta svg{stroke:#BDB49C}
+.link.star  .seta svg{stroke:#E8B45E}
+
+/* ── rodapé ───────────────────────────────────────────────────── */
+.rodape{flex:0 0 auto;text-align:center;padding:2.2rem 1.4rem 2rem;
+  font-size:.71rem;line-height:1.75;color:var(--dark-gray);opacity:.62}
+.rodape a,.rodape button{color:inherit;font-family:inherit;font-size:inherit;
+  background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}
+.rodape a:hover,.rodape button:hover{opacity:1}
+
+/* ── aviso de cookies, igual ao do site ───────────────────────── */
+.cookie-aviso{display:none;position:fixed;bottom:1rem;left:1rem;z-index:245;
+  max-width:min(540px,calc(100vw - 2rem));background:var(--cream);
+  border:1px solid rgba(73,79,75,.16);border-radius:14px;
+  padding:.6rem .75rem .6rem 1rem;box-shadow:0 8px 26px rgba(43,43,43,.12);
+  color:var(--dark-gray);align-items:center;gap:.45rem .8rem;flex-wrap:wrap;
+  animation:cookieEntra .45s ease both}
+.cookie-aviso.mostra{display:flex}
+@keyframes cookieEntra{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.cookie-txt{margin:0;font-size:.76rem;line-height:1.45;flex:1 1 200px;text-align:left}
+.cookie-btns{display:flex;gap:.45rem;flex:0 0 auto}
+.cookie-btns button{font-family:inherit;font-size:.74rem;font-weight:600;
+  padding:.4rem .95rem;border-radius:999px;cursor:pointer;white-space:nowrap;
+  border:1px solid var(--dark-gray);background:transparent;color:var(--dark-gray);
+  transition:background .2s,color .2s,opacity .2s}
+.cookie-btns button.sim{background:var(--dark-gray);color:#fff}
+.cookie-btns button:hover{background:var(--dark-gray);color:#fff}
+.cookie-btns button.sim:hover{opacity:.85}
+.cookie-btns button:focus-visible{outline:2px solid var(--dark-gray);outline-offset:2px}
+@media(max-width:620px){
+  .cookie-aviso{left:.7rem;right:.7rem;bottom:.7rem;max-width:none;padding:.7rem .85rem}
+  .cookie-txt,.cookie-btns{flex:1 1 100%}
+  .cookie-btns button{flex:1 1 0}
+}
+@media(prefers-reduced-motion:reduce){
+  .cookie-aviso{animation:none}
+  .link{transition:none}
+  .link:hover{transform:none}
+}
+@media(max-width:360px){
+  .link{grid-template-columns:40px 1fr 20px;min-height:76px;border-radius:22px}
+  .link .rot{font-size:.9rem}
+}
+</style>
+</head>
+<body>
+<div class="faixa"></div>
+
+<main class="cartao">
+  <img class="logo" src="../assets/logo_color.png" alt="LUCCARE Odontologia" width="1200" height="227" />
+  <span class="marca-sub">Odontologia</span>
+
+  <div class="divisor" aria-hidden="true">
+    <i></i>
+    <svg viewBox="0 0 24 24"><path d="M12 1.6c.5 3.9 1.3 6.3 2.7 7.7 1.4 1.4 3.8 2.2 7.7 2.7-3.9.5-6.3 1.3-7.7 2.7-1.4 1.4-2.2 3.8-2.7 7.7-.5-3.9-1.3-6.3-2.7-7.7-1.4-1.4-3.8-2.2-7.7-2.7 3.9-.5 6.3-1.3 7.7-2.7C10.7 7.9 11.5 5.5 12 1.6z"/></svg>
+    <i></i>
+  </div>
+
+  <h1>Atendimento odontológico<br />infantil e adulto</h1>
+  <p class="especialidades">Odontopediatria · Clínico geral<br />Ortopedia Funcional dos Maxilares · Ortodontia</p>
+
+  <nav class="links" aria-label="Contatos da LUCCARE">
+
+    <a class="link zap" data-track="whatsapp" data-location="cartao"
+       href="https://wa.me/5511945522645?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta%20na%20LUCCARE."
+       target="_blank" rel="noopener">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="#25D366" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.524 5.849L.057 23.996l6.305-1.654A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.94 0-3.75-.53-5.303-1.45l-.38-.226-3.74.981.999-3.648-.247-.388A9.7 9.7 0 012.25 12c0-5.376 4.374-9.75 9.75-9.75S21.75 6.624 21.75 12 17.376 21.75 12 21.75zm5.34-7.3c-.293-.147-1.73-.854-1.998-.951-.268-.098-.463-.147-.658.146-.195.293-.755.951-.926 1.147-.17.195-.341.22-.634.073-.293-.146-1.236-.455-2.354-1.452-.87-.776-1.458-1.735-1.629-2.028-.17-.293-.018-.451.128-.597.132-.131.293-.341.44-.512.146-.17.195-.293.293-.488.098-.195.049-.366-.024-.512-.073-.147-.658-1.586-.902-2.171-.237-.57-.479-.493-.658-.502l-.56-.01c-.195 0-.512.073-.78.366-.268.293-1.024 1-1.024 2.439s1.048 2.829 1.194 3.024c.146.195 2.063 3.15 4.999 4.417.699.302 1.244.482 1.669.617.701.223 1.339.192 1.844.116.562-.084 1.73-.707 1.974-1.39.244-.683.244-1.269.171-1.39-.073-.122-.268-.195-.561-.342z"/></svg></span>
+      <span class="rot">Agende pelo WhatsApp</span>
+      <span class="seta" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>
+    </a>
+
+    <a class="link insta" data-track="instagram" data-location="cartao"
+       href="https://www.instagram.com/luccareodontologia/" target="_blank" rel="noopener">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#E7818F" stroke-width="1.7" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.5" cy="6.5" r="1.15" fill="#E7818F" stroke="none"/></svg></span>
+      <span class="rot">@luccareodontologia</span>
+      <span class="seta" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>
+    </a>
+
+    <a class="link mapa" data-track="maps" data-location="cartao"
+       href="https://www.google.com/maps?cid=6810645429241199466"
+       target="_blank" rel="noopener">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="#3479CE" aria-hidden="true"><path d="M12 1.8c-3.9 0-7.05 3.15-7.05 7.05 0 5.2 6.28 12.5 6.55 12.81a.66.66 0 001 0c.27-.31 6.55-7.61 6.55-12.81 0-3.9-3.15-7.05-7.05-7.05zm0 10.2a3.15 3.15 0 110-6.3 3.15 3.15 0 010 6.3z"/></svg></span>
+      <span class="rot">Rua Francisco Leitão, 469,<br />cj. 1206 · Pinheiros · SP</span>
+      <span class="seta" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>
+    </a>
+
+    <a class="link site" data-track="site" data-location="cartao"
+       href="https://luccareodontologia.com.br/">
+      <span class="ic"><svg viewBox="0 0 44 30" fill="none" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 27a18 18 0 0136 0" stroke="#acc2e8" stroke-width="4"/>
+        <path d="M10.5 27a11.5 11.5 0 0123 0" stroke="#b4d7b7" stroke-width="4"/>
+        <path d="M17 27a5 5 0 0110 0" stroke="#f6c06f" stroke-width="4"/>
+      </svg></span>
+      <span class="rot">Conheça a clínica</span>
+      <span class="seta" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>
+    </a>
+
+    <a class="link star" data-track="maps" data-location="cartao-avaliar"
+       href="https://g.page/r/CWo7D_3uRYReEBM/review" target="_blank" rel="noopener">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="#F5B82E" aria-hidden="true"><path d="M12 1.9l3.1 6.3 6.9 1-5 4.9 1.2 6.9-6.2-3.3-6.2 3.3 1.2-6.9-5-4.9 6.9-1z"/></svg></span>
+      <span class="rot">Avaliar no Google</span>
+      <span class="seta" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>
+    </a>
+
+  </nav>
+</main>
+
+<footer class="rodape">
+  LUCCARE Odontologia · Rua Francisco Leitão, 469 · cj. 1206 · Pinheiros · São Paulo, SP<br />
+  Responsável técnica: Dra. Mayara Macheldey Yamamoto · CRO-SP 124770<br />
+  <button type="button" id="cookieRever">Preferências de cookies</button> ·
+  <a href="../politica-de-privacidade.html">Política de Privacidade</a>
+</footer>
+
+<div class="cookie-aviso" id="cookieAviso" role="region" aria-label="Aviso sobre cookies">
+  <p class="cookie-txt">Este site usa cookies para medir o acesso.</p>
+  <div class="cookie-btns">
+    <button type="button" class="sim" id="cookieSim">Aceitar</button>
+    <button type="button" id="cookieNao">Recusar</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var aviso=document.getElementById('cookieAviso');
+  function mostrar(){aviso.classList.add('mostra');}
+  function esconder(){aviso.classList.remove('mostra');}
+  document.getElementById('cookieSim').addEventListener('click',function(){
+    if(window.__gtmAceitar)window.__gtmAceitar();esconder();});
+  document.getElementById('cookieNao').addEventListener('click',function(){
+    if(window.__gtmRecusar)window.__gtmRecusar();esconder();});
+  document.getElementById('cookieRever').addEventListener('click',function(){
+    try{localStorage.removeItem('luccare_cookies');}catch(e){}
+    mostrar();document.getElementById('cookieSim').focus();});
+  /* a escolha é a mesma do site inteiro: quem já decidiu lá não vê nada aqui */
+  if(!window.__gtmEscolha)setTimeout(mostrar,900);
+})();
+</script>
+
+</body>
+</html>
