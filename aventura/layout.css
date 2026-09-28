@@ -1,0 +1,313 @@
+/* ════════════════════════════════════════════════════════════════════
+   Guardiões do Sorriso · layout de tela de jogo (27/09/2026)
+
+   A página virou tela de jogo: campo, loja e botão de onda cabem juntos,
+   sem rolar, no notebook e no celular deitado. O campo usa container
+   queries (cqw/cqh) para ficar o maior possível mantendo 900×560.
+
+   Quatro formatos:
+   1. computador/notebook ........ campo + coluna de comando, tudo em 100dvh
+   2. tablet e janelas estreitas .. uma coluna, rolagem livre
+   3. celular em pé .............. tudo numa tela; aviso para virar o celular
+   4. celular deitado ............ campo na altura inteira + painel lateral
+   Carregado depois de style.css e art-style.css: sobrepõe só o layout;
+   cores, botões e diálogos continuam vindo deles.
+   ════════════════════════════════════════════════════════════════════ */
+:root{--header-h:58px;--side:292px}
+
+/* ── cabeçalho compacto ─────────────────────────────────────────────── */
+.site-header{max-width:none;height:var(--header-h);padding:0 22px;gap:14px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand img{width:96px;height:auto;display:block}
+.brand h1{font-size:20px;letter-spacing:-.6px;margin:0;white-space:nowrap;padding-left:12px;border-left:1px solid #dcd7c3;line-height:1.1}
+.brand h1 em{font-style:normal;color:#589aaa}
+.header-actions{align-items:center}
+.header-actions .quiet{min-height:40px;padding:8px 13px}
+.header-actions .icon-btn{min-height:40px;height:40px;width:40px}
+.fs-btn span{margin-left:4px}
+
+main{max-width:1680px;padding:0 12px}
+.art-loading{margin:8px 0 0}
+.art-loading[hidden]{display:none}
+
+/* ── arena = tela de jogo ───────────────────────────────────────────── */
+.arena{display:flex;flex-direction:column;height:calc(100dvh - var(--header-h) - 10px);min-height:430px;margin-top:6px}
+.hud{flex:0 0 auto;margin:0;padding:7px 14px;gap:14px}
+.mini{display:none}
+/* regras antigas escondiam o nome da fase em telas menores; agora ele é o botão de trocar fase */
+.hud .map-title{display:flex}
+.map-title>#mapNumber{display:inline}
+.map-title>.map-copy{display:flex}
+#stages .chapters{display:grid!important}
+#stages .chapter{display:block!important}
+#stages .journey-line{display:block!important}
+
+/* nome da fase vira botão que abre "Explore o mundo do Toddy" */
+.map-title{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:10px;border:1px solid transparent;background:transparent;border-radius:12px;padding:3px 10px 3px 4px;text-align:left;min-height:48px;color:inherit}
+.map-title:hover{background:#ffffff9c;border-color:#dcdcc8}
+.map-title>#mapNumber{font-weight:bold;font-size:21px;color:#8fa87f;flex:none}
+.map-copy{display:flex;flex-direction:column;min-width:0;color:var(--ink);font-size:inherit;font-weight:normal}
+.map-copy .eyebrow{font-size:8px;margin:0 0 2px;display:flex;gap:8px;align-items:center}
+.map-copy .chev{letter-spacing:.4px;color:#7d9a86;font-weight:bold}
+#mapTitle{font-size:16px;line-height:1.2;letter-spacing:-.4px;color:var(--ink);font-weight:bold}
+.fs-btn{display:inline-flex;align-items:center;gap:6px}
+.fs-btn[hidden]{display:none}
+.fs-ico{display:block;flex:none}
+.map-rule{font-size:10px;color:#6d7c70;line-height:1.35;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:520px}
+.counters{flex:none}
+.counters>div{transform-origin:center}
+.speed button{min-height:40px;height:40px}
+
+/* corpo: campo à esquerda, comando à direita */
+.game-layout{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) var(--side);gap:16px;padding:10px 16px 12px}
+.battle-column{display:flex;flex-direction:column;min-height:0;min-width:0;gap:8px}
+.field-wrap{flex:1 1 auto;min-height:150px;container-type:size;display:grid;place-items:center}
+.battlefield{width:min(100cqw,calc(100cqh * 900 / 560));height:auto;aspect-ratio:900/560}
+.rotate-hint[hidden],.quick-shop[hidden]{display:none!important}
+
+/* faixa de baixo: Toddy + próxima onda lado a lado */
+.play-row{flex:none;display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,auto);gap:10px;align-items:stretch}
+.play-row .coach{min-height:0;padding:4px 2px}
+.play-row .coach p{margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.play-row .coach img{width:44px;height:48px}
+.play-row .wave-strip{padding:9px 12px}
+.play-row .wave-strip h3{font-size:14px;margin-bottom:3px}
+.play-row .wave-strip p:last-child{max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wave-progress{flex:none;padding:2px 4px 0}
+
+.command{min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:4px}
+.command .selection{min-height:0}
+.quick-shop{display:none}
+
+/* abaixo da tela de jogo: rodapé e aviso de faz de conta */
+main>footer{padding:14px 4px}
+.real-life{padding:0 4px 24px}
+
+/* diálogo de fases */
+#stages{width:min(900px,calc(100% - 26px))}
+#stages h2{margin-bottom:6px}
+#stages .journey-line{display:block;font-size:11px;letter-spacing:.2px;font-weight:normal;color:#7b8a70;margin:0 0 16px}
+#stages .chapters{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;overflow:visible;margin:0 0 12px;padding:0}
+#stages .chapter{max-width:none;flex:none;min-height:0}
+#stages .chapter .map-thumb{height:104px}
+.settings-links{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 4px}
+.settings-links .quiet{display:inline-flex;align-items:center;text-decoration:none;min-height:44px}
+
+/* aviso "vire o celular" */
+.rotate-hint{flex:none;display:flex;align-items:center;gap:10px;background:#eef4e8;border:1px solid #cddcc4;border-radius:12px;padding:6px 8px 6px 10px}
+.rotate-hint p{flex:1;margin:0;font-size:11px;line-height:1.35;color:#46645a}
+.rotate-hint .primary{min-height:40px;padding:8px 12px;font-size:11px;flex:none}
+.rotate-phone{width:22px;height:34px;border:2.5px solid #4f8b7d;border-radius:5px;flex:none;position:relative;animation:girar 2.6s ease-in-out infinite}
+.rotate-phone:after{content:'';position:absolute;left:50%;bottom:2px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:#4f8b7d}
+@keyframes girar{0%,30%{transform:rotate(0)}55%,85%{transform:rotate(-90deg)}100%{transform:rotate(0)}}
+
+/* ── notebooks e telas medianas ─────────────────────────────────────── */
+@media (max-width:1180px){:root{--side:258px}
+ .brand h1{font-size:18px}
+ .map-rule{max-width:360px}
+ .play-row{grid-template-columns:minmax(0,1fr) minmax(260px,auto)}
+}
+@media (max-height:760px) and (min-width:901px){
+ .play-row .coach img{display:none}
+ .play-row .wave-strip{padding:7px 10px}
+ .play-row .wave-strip p:last-child{display:none}
+ .hud{padding:5px 12px}
+ .map-rule{display:none}
+}
+
+/* ── tablet e janelas estreitas: uma coluna, rolagem livre ──────────── */
+@media (max-width:900px) and (min-height:551px){
+ .arena{height:auto;min-height:0}
+ .game-layout{display:block;padding:8px 10px 12px}
+ .field-wrap{container-type:inline-size;display:block}
+ .battlefield{width:100%}
+ .play-row{margin-top:8px;grid-template-columns:1fr}
+ .play-row .wave-strip p:last-child{white-space:normal}
+ .command{overflow:visible;margin-top:12px}
+ .quick-shop{display:block;margin-top:8px}
+ .quick-shop .shop{grid-template-columns:repeat(5,1fr)}
+ .command>.section-label,.command>#shop{display:none}
+ .command{display:block}
+ .map-rule{white-space:normal}
+}
+
+/* ── celular em pé: tudo numa tela só ───────────────────────────────── */
+@media (max-width:520px){
+ :root{--header-h:46px}
+ .site-header{padding:0 8px;gap:6px}
+ .back span{display:none}
+ .back{font-size:18px;min-width:40px;justify-content:center}
+ .brand img{width:78px}
+ .brand h1{font-size:14px;padding-left:8px}
+ .header-actions .quiet{display:none}
+ main{padding:0}
+ .arena{border-radius:0;border-left:0;border-right:0;margin-top:0;height:auto}
+ .hud{position:static;padding:4px 6px;gap:6px;flex-wrap:nowrap}
+ .map-title{flex:0 0 auto;padding:2px 6px 2px 4px;min-height:44px;gap:4px}
+ .map-copy .eyebrow,.map-rule,#mapTitle{display:none}
+ .map-title:after{content:'▾';font-size:12px;color:#7d9a86}
+ .map-title>#mapNumber{font-size:17px}
+ .counters{flex:1;gap:8px;justify-content:space-around}
+ .counters b{font-size:15px}
+ .counters small{display:none}
+ .counters .money>span,.counters .lives>span{font-size:14px}
+ .speed button{width:38px;min-width:38px;min-height:40px;height:40px;font-size:12px}
+ .game-layout{padding:0 0 8px}
+ .battlefield,.battlefield canvas{border-radius:0}
+ .rotate-hint{margin:6px 8px 0}
+ .quick-shop{display:block;margin:6px 8px 0}
+ .quick-shop>p{display:none}
+ .quick-shop .shop button{min-height:74px}
+ .play-row{margin:6px 8px 0;gap:6px;grid-template-columns:1fr}
+ .play-row .wave-strip{order:-1;padding:7px 8px 7px 10px}
+ .play-row .wave-strip h3{font-size:13px}
+ .play-row .wave-strip p:last-child{display:none}
+ .play-row .coach{padding:0 2px;gap:6px}
+ .play-row .coach img{width:34px;height:38px}
+ .play-row .coach p{font-size:11px;-webkit-line-clamp:2}
+ .coach-name{display:none}
+ .wave-progress{padding:6px 8px 0}
+ .command{margin:10px 8px 0;overflow:visible}
+ .command>.section-label,.command>#shop,.command>.hero-button{display:none}
+}
+
+/* ── celular deitado: campo na altura inteira + painel lateral ──────── */
+@media (orientation:landscape) and (max-height:550px){
+ :root{--side-min:200px}
+ html,body{height:100%;overflow:hidden}
+ body{background:#fff9ef}
+ .site-header,main>footer,.real-life,.art-loading{display:none!important}
+ main{max-width:none;padding:0}
+ .arena{position:fixed;inset:0;height:auto;min-height:0;margin:0;border:0;border-radius:0;box-shadow:none;
+  padding:0 env(safe-area-inset-right) 0 env(safe-area-inset-left);
+  display:grid;grid-template-columns:auto minmax(var(--side-min),1fr);
+  grid-template-rows:auto auto auto minmax(0,1fr) auto;column-gap:0;row-gap:6px;
+  grid-template-areas:"field hud" "field shop" "field wave" "field coach" "field prog"}
+ .game-layout,.battle-column{display:contents}
+ .field-wrap{grid-area:field;grid-row:1/-1;height:100dvh;
+  width:min(calc(100dvh * 900 / 560),calc(100vw - var(--side-min) - env(safe-area-inset-left) - env(safe-area-inset-right)));
+  container-type:size;display:grid;place-items:center;min-height:0}
+ .battlefield,.battlefield canvas{border-radius:0}
+ .rotate-hint{display:none!important}
+
+ /* painel lateral */
+ .hud{grid-area:hud;display:flex;flex-wrap:wrap;gap:4px;padding:6px 8px 0;border:0;background:none;position:static}
+ .hud>.mini,.hud>.map-title{flex:1 1 34px}
+ .mini-back{order:1}.map-title{order:2}.mini-guide{order:3}.mini-fs{order:4}.mini-settings{order:5}
+ .counters{order:6;flex:1 1 100%}.speed{order:7;flex:1 1 100%}
+ .mini{display:grid;place-items:center;min-height:40px;height:40px;border:1px solid #d6dccb;border-radius:11px;background:#fffdf6;font-size:16px;text-decoration:none;color:inherit;padding:0}
+ .mini[hidden]{display:none}
+ .map-title{min-height:40px;height:40px;padding:0;justify-content:center;border:1px solid #d6dccb;background:#fffdf6;gap:2px}
+ .map-copy .eyebrow,.map-rule,#mapTitle{display:none}
+ .map-title>#mapNumber{font-size:15px}
+ .map-title:after{content:'▾';font-size:10px;color:#7d9a86}
+ .counters{display:flex;justify-content:space-around;gap:4px;padding:2px 0}
+ .counters b{font-size:15px}.counters small{display:none}
+ .counters .money>span,.counters .lives>span{font-size:14px}
+ .speed{display:grid;grid-template-columns:repeat(4,1fr);padding:2px}
+ .speed button{width:auto;min-width:0;min-height:38px;height:38px;font-size:12px}
+
+ .quick-shop{grid-area:shop;display:block;margin:0 8px;padding:5px;border-radius:11px}
+ .quick-shop>p{display:none}
+ .quick-shop .shop{grid-template-columns:repeat(3,1fr);gap:4px}
+ .quick-shop .shop button{min-height:58px;padding:3px 1px}
+ .quick-shop .shop img{width:30px!important;height:32px!important}
+ .quick-shop .shop strong{font-size:8px}
+ .quick-shop .shop small{font-size:8px;margin-top:1px}
+
+ .play-row{display:contents}
+ .play-row .wave-strip{grid-area:wave;margin:0 8px;padding:0;border:0;background:none}
+ .play-row .wave-strip>div{display:none}
+ .play-row .wave-strip .primary{width:100%;min-height:44px;font-size:12px;padding:8px}
+ .play-row .coach{grid-area:coach;margin:0 8px;min-height:0;padding:0;gap:6px;align-items:flex-start;overflow:hidden}
+ .play-row .coach img,.coach-name,#guideOpen{display:none}
+ .play-row .coach p{font-size:10.5px;line-height:1.4;-webkit-line-clamp:4;margin:0}
+ .mobile-roar{display:block;flex:none;border:1px solid #e0c988;border-radius:11px;background:#faedc8;min-width:58px;min-height:44px;padding:5px;font-size:10px;font-weight:bold}
+ .mobile-roar span{font-size:9px;font-weight:normal;display:block;margin-top:2px}
+ .wave-progress{grid-area:prog;padding:0 8px 8px;gap:3px}
+ .wave-progress span{height:4px}
+
+ .command{grid-area:none;position:static;overflow:visible;padding:0;margin:0;border:0}
+ .command>.section-label,.command>#shop,.command>.hero-button,.command-foot{display:none}
+ .command .selection:not(.mobile-open){display:none}
+ /* painel da torre desliza por cima do painel lateral */
+ .selection.mobile-open{position:fixed;z-index:20;top:0;bottom:0;right:0;left:auto;width:max(250px,calc(100vw - 100dvh * 900 / 560 - env(safe-area-inset-left)));
+  max-height:none;margin:0;overflow:auto;background:#fffdf5;border:0;border-left:1px solid #a9bf9b;border-radius:0;padding:14px 12px calc(12px + env(safe-area-inset-bottom)) 12px;box-shadow:-10px 0 40px #244d4333}
+ .selection.mobile-open .dismiss-selection{display:block;position:absolute;right:4px;top:4px;width:44px;border:0;background:none;font-size:24px}
+ .selection.mobile-open .selection-head{padding-right:40px}
+ .selection.mobile-open .selection-head img{width:44px;height:48px}
+ .selection.mobile-open .selection-head h3{font-size:15px}
+ .selection.mobile-open p{font-size:10px}
+ .selection.mobile-open .upgrade{min-height:54px;padding:7px}
+ .boss-banner{top:6px;min-width:210px;padding:6px 10px 6px 58px;min-height:52px}
+ .boss-banner img{width:40px;height:44px;top:4px}
+ .paused-overlay h2{font-size:18px;margin:4px 0}
+ .paused-overlay p{font-size:11px;margin-bottom:8px}
+ dialog{max-height:94dvh;padding:26px 18px 18px}
+ #lesson{max-width:620px}
+ .lesson-landscape{height:80px}
+}
+@media (orientation:landscape) and (max-height:550px) and (max-width:720px){
+ :root{--side-min:172px}
+ .mini-guide{display:none!important}
+ .quick-shop .shop strong{font-size:7.5px}
+}
+@media (orientation:landscape) and (max-height:380px){
+ .quick-shop .shop button{min-height:50px}
+ .quick-shop .shop img{width:26px!important;height:27px!important}
+ .quick-shop .shop small{display:none}
+ .speed button{min-height:34px;height:34px}
+ .mini,.map-title{min-height:36px;height:36px}
+ .play-row .coach p{-webkit-line-clamp:2}
+}
+
+@media (prefers-reduced-motion:reduce){.rotate-phone{animation:none;transform:rotate(-90deg)}}
+
+/* ── Rodada 2 (27/09): botão de fases visível, selo e chave do desafio adulto ── */
+.map-title>.stage-chip{flex:none;display:inline-flex;align-items:center;gap:6px;margin-left:auto;padding:7px 12px;border-radius:999px;background:#367c77;color:#fffaf0;font-size:12px;font-weight:bold;letter-spacing:.2px;box-shadow:0 2px 0 #255c55}
+.map-title:hover>.stage-chip{background:#40877c}
+.chip-ico{display:block}
+.map-title{flex:1 1 auto}
+.mode-badge{display:inline-block;background:#8b3f5f;color:#fff6f0;border-radius:6px;padding:1px 6px;letter-spacing:.8px;font-size:8px}
+.mode-badge[hidden]{display:none}
+body.adult-mode .hud{background:linear-gradient(110deg,#fbf1f3,#f1ecf7)}
+body.adult-mode .map-title>.stage-chip{background:#8b3f5f;box-shadow:0 2px 0 #6a2d47}
+.mode-switch{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 18px}
+.mode-switch button{text-align:left;border:2px solid #d9dccb;background:#fffdf6;border-radius:14px;padding:12px 14px;min-height:64px}
+.mode-switch button strong{display:block;font-size:14px}
+.mode-switch button small{display:block;font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
+.mode-switch button.on{border-color:#367c77;background:#e9f3ec;box-shadow:0 3px 0 #9cc3b4}
+.mode-switch button[data-mode=adult].on{border-color:#8b3f5f;background:#f8edf1;box-shadow:0 3px 0 #d7a9bc}
+@media (max-width:520px){
+ .map-title{flex:0 0 auto}
+ .map-title>.stage-chip{margin-left:4px;padding:6px 9px;font-size:11px}
+ .map-title:after{content:none}
+ .mode-switch{grid-template-columns:1fr}
+}
+@media (orientation:landscape) and (max-height:550px){
+ .map-title{background:#367c77;border-color:#367c77;color:#fffaf0}
+ body.adult-mode .map-title{background:#8b3f5f;border-color:#8b3f5f}
+ .map-title>#mapNumber{color:#fffaf0}
+ .map-title:after{color:#fffaf0}
+ .map-title>.stage-chip{display:none}
+ .mode-switch{grid-template-columns:1fr 1fr}
+}
+/* celular em pé: a pílula "Fases" substitui o número da fase para caber com a velocidade */
+@media (max-width:520px){
+ .map-title>#mapNumber{display:none}
+ .map-title{padding:2px;min-height:44px}
+ .map-title>.stage-chip{margin-left:0;padding:7px 10px}
+ .counters{gap:6px}
+}
+@media (max-width:370px){.map-title>.stage-chip>span{display:none}.map-title>.stage-chip{padding:8px}}
+
+/* estrelas do desafio adulto em "Minha jornada" */
+.progress-card .adult-stars{color:#8b3f5f;font-size:13px;margin-top:-4px}
+.progress-card .adult-stars small{font-size:8px;letter-spacing:1px;font-weight:bold;vertical-align:2px}
+/* modo difícil: chave discreta nos ajustes */
+.hard-setting span{display:flex;flex-direction:column}
+.hard-setting small{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4;max-width:380px}
+.hard-setting input{accent-color:#8b3f5f}
+.hard-hint{color:#8b3f5f!important}
+.hard-hint[hidden],.hard-setting[hidden]{display:none!important}
+.hard-setting{margin-bottom:10px}

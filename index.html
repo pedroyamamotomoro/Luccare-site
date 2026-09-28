@@ -1135,6 +1135,7 @@ body.kids .cookie-aviso,body.menu-aberto .cookie-aviso{display:none}
 .instagram-float:hover svg{fill:#fff}
 .instagram-float:focus-visible{outline:2px solid var(--dark-gray);outline-offset:3px}
 body.kids .instagram-float,body.menu-aberto .instagram-float{display:none}
+.aventura-convite{display:flex;align-items:center;gap:16px;background:#e6eddc;border:2px solid #b9cfac;border-radius:22px;padding:20px;margin:28px 0 18px;color:#254e43;text-decoration:none;box-shadow:0 5px 0 #b9cfac}.aventura-convite>svg{width:72px;height:72px;flex-shrink:0}.aventura-convite small{font-size:.65rem;letter-spacing:.1em;font-weight:800;display:block}.aventura-convite strong{font-family:'Baloo 2',cursive;font-size:1.6rem;display:block;line-height:1.2;margin:6px 0}.aventura-convite span span{font-size:.85rem;display:block;line-height:1.4}.aventura-convite>b{margin-left:auto;font-size:1.7rem}.aventura-convite:focus-visible{outline:4px solid #254e43;outline-offset:5px}@media(max-width:480px){.aventura-convite{padding:15px;gap:10px}.aventura-convite>svg{width:52px;height:52px}.aventura-convite strong{font-size:1.25rem}.aventura-convite small{font-size:.55rem}}
 </style>
 <script type="application/ld+json">
 {
@@ -1934,6 +1935,11 @@ body.kids .instagram-float,body.menu-aberto .instagram-float{display:none}
         <span class="selo-ok"><svg width="16" height="16" viewBox="0 0 24 24"><use href="#ic-check"/></svg></span>
       </button>
     </div>
+
+    <a href="aventura/index.html" class="aventura-convite" aria-label="Jogar Guardiões do Sorriso, aventura de estratégia para 6 anos ou mais">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#ic-toddy"/></svg>
+      <span><small>NOVA AVENTURA · 6 ANOS OU MAIS</small><strong>Guardiões do Sorriso</strong><span>Monte seu time de torres e proteja o sorriso em 6 fases.</span></span><b aria-hidden="true">→</b>
+    </a>
 
     <div class="secao-rot"><svg width="26" height="26" viewBox="0 0 64 64"><use href="#ic-toddy"/></svg> Meus adesivos</div>
     <div class="adesivos" id="adesivos">
@@ -3028,8 +3034,8 @@ document.getElementById('btnVoltar').addEventListener('click',()=>trocarModo(fal
       if(limpos>=META){
         dica.textContent='';
         premiar('escovar', completou
-          ? 'Os quatro cantinhos da boca do Toddy, limpinhos! Nos seus dentes é igual, só que com calma: use o timer do Toddy e escove dois minutos, de manhã e antes de dormir, com a ajuda de um adulto.'
-          : 'Você limpou '+limpos+' dos 12 dentes do Toddy. Nos seus dentes o combinado é: dois minutos no timer, de manhã e antes de dormir, com a ajuda de um adulto.');
+          ? 'Os quatro cantinhos da boca do Toddy, limpinhos! Nos seus dentes, escove com calma por cerca de dois minutos, pelo menos duas vezes ao dia — uma delas antes de dormir. Pode haver outras escovações; siga a orientação da odontopediatra e conte com a ajuda de uma pessoa adulta.'
+          : 'Você limpou '+limpos+' dos 12 dentes do Toddy. Nos seus dentes, escove com calma por cerca de dois minutos, pelo menos duas vezes ao dia — uma delas antes de dormir. Pode haver outras escovações; siga a orientação da odontopediatra e conte com a ajuda de uma pessoa adulta.');
       }else{
         dica.textContent='Acabou o tempo! Você limpou '+limpos+' de 12 dentes. Vamos tentar de novo?';
         SONS.erro();
@@ -3513,8 +3519,8 @@ document.getElementById('btnVoltar').addEventListener('click',()=>trocarModo(fal
   })();
 
   /* ══════ JOGO — O LANCHE DO TODDY ══════
-     Sem culpa alimentar: nada é proibido. O que se ensina é frequência
-     e escovar depois. ATENÇÃO: as frases precisam de aval clínico. */
+     Sem culpa alimentar: o foco é frequência, contexto das refeições
+     e água como bebida principal. ATENÇÃO: as frases precisam de aval clínico. */
   (function(){
     const palco=document.querySelector('.lanche-palco'),alvo=document.getElementById('lancheItem');
     const nome=document.getElementById('lancheNome'),txt=document.getElementById('lancheTxt');
@@ -3523,21 +3529,21 @@ document.getElementById('btnVoltar').addEventListener('click',()=>trocarModo(fal
     if(!alvo||!btn)return;
     const COMIDAS=[
       {ic:'ic-maca',n:'Maçã',dia:1,
-       txt:'Fruta pode todo dia, e é um ótimo lanche entre as refeições.'},
+       txt:'Frutas fazem parte de uma alimentação variada. Prefira a fruta inteira e combine os horários das refeições com a família.'},
       {ic:'ic-agua',n:'Água',dia:1,
-       txt:'Água é a melhor amiga dos dentes. Depois de um docinho, um copo de água já ajuda bastante.'},
+       txt:'Água é a melhor bebida para matar a sede. Depois de algo açucarado, beber água não substitui a escovação com creme dental com flúor.'},
       {ic:'ic-queijo',n:'Queijo',dia:1,
-       txt:'Queijo pode todo dia e é um lanche amigo dos dentes.'},
+       txt:'Queijo pode fazer parte de uma alimentação variada. Para os dentes, a frequência e o horário dos alimentos também contam.'},
       {ic:'ic-cenoura',n:'Cenoura',dia:1,
-       txt:'Legume crocante pode todo dia. Mastigar bem também faz bem para os dentes.'},
+       txt:'Legumes fazem parte de uma alimentação variada. Mastigar alimentos crocantes não substitui a escova e o fio dental.'},
       {ic:'ic-bala',n:'Bala',dia:0,
-       txt:'Bala não é proibida, mas é de vez em quando: ela gruda no dente e demora a sair. Melhor comer na sobremesa e escovar depois.'},
+       txt:'Bala é para de vez em quando. Repetir açúcar muitas vezes ao dia aumenta o risco de cárie; quando houver, prefira junto de uma refeição.'},
       {ic:'ic-refri',n:'Refrigerante',dia:0,
-       txt:'De vez em quando. O refrigerante tem muito açúcar e deixa a boca ácida. Depois dele, um copo de água ajuda.'},
+       txt:'Refrigerante é para de vez em quando: costuma reunir açúcar e acidez. Água continua sendo a melhor bebida para a sede.'},
       {ic:'ic-bolo',n:'Bolo',dia:0,
-       txt:'Bolo de aniversário é festa! É de vez em quando, e depois é só escovar os dentes.'},
+       txt:'Bolo de aniversário é festa! O cuidado é deixar para ocasiões especiais e evitar repetir alimentos açucarados muitas vezes ao longo do dia.'},
       {ic:'ic-pirulito',n:'Pirulito',dia:0,
-       txt:'De vez em quando. O pirulito fica muito tempo na boca, e é esse tempão que os dentes não gostam.'}
+       txt:'Pirulito é para de vez em quando. Como fica muito tempo na boca, prolonga o contato dos dentes com o açúcar.'}
     ];
     const QUANTOS=[5,7,9];
     let fila=[],i=0,acertos=0,rodando=false,bolas=[];
@@ -3600,8 +3606,8 @@ document.getElementById('btnVoltar').addEventListener('click',()=>trocarModo(fal
       alvo.innerHTML='';nome.textContent='';
       btn.textContent='Jogar de novo';
       premiar('lanche', acertos===fila.length
-        ? 'Você acertou todos! Lembre do combinado: o docinho fica melhor na sobremesa, e depois é só escovar os dentes.'
-        : 'Nenhum lanche é proibido. O que os dentes pedem é doce de vez em quando, na sobremesa, e escovação depois.');
+        ? 'Você acertou todos! Lembre do combinado: água para matar a sede e alimentos açucarados menos vezes, de preferência junto das refeições. A higiene diária continua importante.'
+        : 'Vamos tentar de novo? Para os dentes, contam a frequência do açúcar, o contexto das refeições, a água como bebida principal e a higiene diária.');
     }
     cestas.forEach(b=>b.addEventListener('click',()=>responder(+b.dataset.cesta,b)));
     btn.addEventListener('click',()=>{
