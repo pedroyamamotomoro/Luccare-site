@@ -162,7 +162,7 @@
  // fáceis). Calibrado em _ferramentas/qa-tower/adulto-sim.cjs: contra as mesmas
  // estratégias, cerca de metade das vitórias do modo normal em cada fase.
  // (internamente continua se chamando "adult"/"hard" para manter os saves compatíveis)
- const adult={hp:[.96,.93,.96,1.10,1.08,1.03],speed:1.06,cash:.92,reward:.92};
+ const adult={hp:[.95,1,1,1.14,1.08,1.07],speed:1.08,cash:.90,reward:.90};
  const data={economy,towers,enemies,maps,stats,medals,ability,adult,introductions,unlockedTowers,towerAvailable,purchaseCost,step:1/60,version:3};
  if(typeof module!=='undefined'&&module.exports)module.exports=data;else root.LuccareBalance=data;
 })(typeof window!=='undefined'?window:globalThis);
