@@ -4,9 +4,8 @@
 <meta charset="UTF-8" />
 <!-- Google Consent Mode v2 + Google Tag Manager -->
 <script>
-/* Mesma política do resto do site: o contêiner GTM-T7B4GD3L carrega sempre,
-   mas os quatro estados nascem 'denied' — as tags do Google rodam sem cookie
-   e sem identificador até o aceite. A escolha fica em
+/* Mesma política do resto do site: o contêiner GTM-T7B4GD3L carrega sempre e,
+   desde 02/10/2026, a medição nasce ligada; só "Recusar" desliga. A escolha fica em
    localStorage['luccare_cookies'], que é compartilhado com o site inteiro:
    quem já decidiu lá não vê o aviso aqui, e vice-versa.
    Aqui não há Modo Criança, então o bloqueio do Cantinho não se aplica. */
@@ -16,11 +15,14 @@
   function gtag(){w.dataLayer.push(arguments);}
   var esc=null;try{esc=localStorage.getItem(CHAVE);}catch(e){}
   w.__gtmEscolha=esc;
-  var ok=(esc==='sim');
+  /* 02/10/2026: medicao ligada por padrao (estatistica e conversao de
+     anuncio, base legal: legitimo interesse); so "Recusar" desliga.
+     Remarketing (ad_personalization) continua so com "Entendi". */
+  var ok=(esc!=='nao'),rmk=(esc==='sim');
   gtag('consent','default',{
     ad_storage:        ok?'granted':'denied',
     ad_user_data:      ok?'granted':'denied',
-    ad_personalization:ok?'granted':'denied',
+    ad_personalization:rmk?'granted':'denied',
     analytics_storage: ok?'granted':'denied',
     wait_for_update:500
   });
@@ -253,9 +255,9 @@ h1{font-family:'Cormorant Garamond',serif;font-weight:400;
 </footer>
 
 <div class="cookie-aviso" id="cookieAviso" role="region" aria-label="Aviso sobre cookies">
-  <p class="cookie-txt">Este site usa cookies para medir o acesso.</p>
+  <p class="cookie-txt">Usamos cookies para estatísticas de acesso e resultados dos nossos anúncios.</p>
   <div class="cookie-btns">
-    <button type="button" class="sim" id="cookieSim">Aceitar</button>
+    <button type="button" class="sim" id="cookieSim">Entendi</button>
     <button type="button" id="cookieNao">Recusar</button>
   </div>
 </div>

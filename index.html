@@ -6,10 +6,10 @@
 <script>
 /* LUCCARE - consentimento e medicao.
 
-   SITE NORMAL - Consent Mode v2 no modo avancado: o conteiner GTM-T7B4GD3L
-   carrega sempre, mas os quatro estados nascem 'denied'. Nesse estado as tags
-   do Google rodam sem cookie e sem identificador. "Aceitar" manda um
-   consent update para 'granted'; "Recusar" mantem 'denied'. A escolha fica em
+   SITE NORMAL - Consent Mode v2: o conteiner GTM-T7B4GD3L carrega sempre.
+   Desde 02/10/2026 a medicao (analytics_storage, ad_storage, ad_user_data)
+   nasce 'granted' e so "Recusar" desliga (opt-out). ad_personalization
+   (remarketing) so com "Entendi". A escolha fica em
    localStorage['luccare_cookies'] (sim/nao) e pode ser trocada pelo link
    "Preferencias de cookies" no rodape.
 
@@ -30,13 +30,16 @@
 
   var esc=null;try{esc=localStorage.getItem(CHAVE);}catch(e){}
   w.__gtmEscolha=esc;
-  var ok=(esc==='sim');
+  /* 02/10/2026: medicao ligada por padrao (estatistica e conversao de
+     anuncio, base legal: legitimo interesse); so "Recusar" desliga.
+     Remarketing (ad_personalization) continua so com "Entendi". */
+  var ok=(esc!=='nao'),rmk=(esc==='sim');
 
   /* precisa vir ANTES do conteiner: e o estado com que as tags nascem */
   gtag('consent','default',{
     ad_storage:        ok?'granted':'denied',
     ad_user_data:      ok?'granted':'denied',
-    ad_personalization:ok?'granted':'denied',
+    ad_personalization:rmk?'granted':'denied',
     analytics_storage: ok?'granted':'denied',
     wait_for_update:500
   });
@@ -1550,12 +1553,12 @@ body.kids .instagram-float,body.menu-aberto .instagram-float{display:none}
 </footer>
 <!-- aviso de cookies: só aparece enquanto não houver escolha -->
 <div class="cookie-aviso" id="cookieAviso" role="region" aria-label="Aviso sobre cookies">
-  <p class="cookie-txt">Este site usa cookies para medir o acesso.<button type="button" class="cookie-mais" id="cookieMais" aria-expanded="false" aria-controls="cookieDetalhe">Entenda</button></p>
+  <p class="cookie-txt">Usamos cookies para estatísticas de acesso e resultados dos nossos anúncios.<button type="button" class="cookie-mais" id="cookieMais" aria-expanded="false" aria-controls="cookieDetalhe">Entenda</button></p>
   <div class="cookie-btns">
-    <button type="button" class="sim" id="cookieSim">Aceitar</button>
+    <button type="button" class="sim" id="cookieSim">Entendi</button>
     <button type="button" id="cookieNao">Recusar</button>
   </div>
-  <p class="cookie-detalhe" id="cookieDetalhe">São apenas estatísticas gerais de acesso e dos nossos anúncios. Não vendemos dados. No Cantinho do Toddy a medição fica sempre desligada. A escolha pode ser mudada no rodapé.</p>
+  <p class="cookie-detalhe" id="cookieDetalhe">São apenas estatísticas gerais de acesso e dos nossos anúncios, sem remarketing. Não vendemos dados. Para desligar, clique em Recusar. No Cantinho do Toddy a medição fica sempre desligada. A escolha pode ser mudada no rodapé.</p>
 </div>
 
 
@@ -3990,6 +3993,43 @@ document.querySelectorAll('[data-carrossel]').forEach(car=>{
   window.addEventListener('resize',()=>{if(aviso.classList.contains('mostra'))medir();});
   /* entra sem pressa: 900 ms depois da página assentar */
   if(!window.__gtmEscolha&&!document.body.classList.contains('kids'))setTimeout(mostrar,900);
+})();
+</script>
+<script>
+/* Origem Google Ads (02/10/2026): quem chega por um anuncio do Google
+   (gclid/gbraid/wbraid ou utm google+cpc) abre o WhatsApp com a frase
+   "Encontrei a LUCCARE no Google", para a recepcao saber na hora de onde
+   veio o contato. Nada e enviado a lugar nenhum: a marca fica so na aba
+   (sessionStorage) e aparece apenas na mensagem que a pessoa decide mandar. */
+(function(){
+  var K='luccare_origem',q=location.search,ads=false;
+  try{
+    var u=new URLSearchParams(q);
+    ads=!!(u.get('gclid')||u.get('gbraid')||u.get('wbraid')||
+      (/google/i.test(u.get('utm_source')||'')&&/cpc|paid|ppc/i.test(u.get('utm_medium')||'')));
+    if(ads)sessionStorage.setItem(K,'google-ads');
+    else ads=sessionStorage.getItem(K)==='google-ads';
+  }catch(e){}
+  if(!ads)return;
+  var BASE='Olá! Encontrei a LUCCARE no Google e gostaria de agendar uma consulta.';
+  function frase(t){
+    if(!t)return BASE;
+    var m=t.match(/^Olá!\s*Gostaria de (.*)$/i);
+    if(!m)return 'Olá! Encontrei a LUCCARE no Google. '+t.replace(/^Olá!\s*/i,'');
+    return 'Olá! Encontrei a LUCCARE no Google e gostaria de '+m[1].replace(/\s+na LUCCARE\.$/,'.');
+  }
+  function marcar(){
+    var links=document.querySelectorAll('a[href*="wa.me/"]');
+    for(var i=0;i<links.length;i++){
+      var a=links[i];if(a.dataset.origem)continue;
+      try{
+        var url=new URL(a.href);
+        url.searchParams.set('text',frase(url.searchParams.get('text')));
+        a.href=url.toString().replace(/\+/g,'%20');a.dataset.origem='google-ads';
+      }catch(e){}
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',marcar);else marcar();
 })();
 </script>
 </body>
