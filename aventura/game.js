@@ -107,7 +107,7 @@
  function soundUI(){audio.enabled=profile.settings.sound;audio.volume=profile.settings.volume;$('sound').textContent='Som: '+(audio.enabled?'ligado':'desligado');$('sound').setAttribute('aria-pressed',String(audio.enabled));$('audioEnabled').checked=audio.enabled;$('volume').value=audio.volume;$('homeMode').classList.toggle('active',store.mode==='home');$('sharedMode').classList.toggle('active',store.mode==='shared');}
  function showLesson(){const lesson=B.introductions[s.stage];$('lessonStage').textContent='FASE '+(s.stage+1)+' · '+B.maps[s.stage].name;$('lessonTitle').textContent=lesson.title;$('lessonFact').textContent=lesson.fact;$('lessonTip').textContent=lesson.tip;$('lessonArt').src=LuccareArt.icon(lesson.tower||'toddy',240);$('lessonScene').src=LuccareAssets.images[B.maps[s.stage].theme]?.src||postcards[s.stage];$('lessonRegion').textContent=B.maps[s.stage].subtitle;$('lesson').dataset.guardian=lesson.tower||'team';$('lessonEvolution').innerHTML=lesson.tower?[1,2,3,4].map(level=>'<div><img src="'+LuccareArt.icon(lesson.tower,120,level,'a')+'" alt="'+B.towers[lesson.tower].name+', nível '+level+'"><span>Nível '+level+'</span></div>').join(''):Object.keys(B.towers).map(type=>'<div><img src="'+images[type]+'" alt="'+B.towers[type].name+'"><span>'+B.towers[type].name+'</span></div>').join('');if(!$('lesson').open)$('lesson').showModal();}
  function reset(stage){if(!Number.isInteger(stage)||stage<0||stage>B.maps.length-1||stage>reach(isAdult())){say('Esta fase ainda está bloqueada. Conclua a fase anterior para continuar a jornada.');return false;}s=newGame(stage);renderer.fx?.reset();selected=-1;chosen='brush';ended=false;bannerUntil=0;clock.reset();last=0;renderChapters();renderShop();renderPads();renderWave();saveCheckpoint();hud(true);
-  if(firstVisit(s)){say(B.maps[stage].waves[0].lesson);showLesson();}
+  if(firstVisit(s)){say(B.maps[stage].waves[0].lesson);showLesson();maybeTutor();}
   else say(intro(s));
   schedule();return true;}
  function begin(){
@@ -223,8 +223,13 @@
  window.addEventListener('pagehide',()=>{E.pause(s);cancelAnimationFrame(raf);raf=0;last=0;persist();});window.addEventListener('pageshow',()=>{last=0;schedule();});
  document.addEventListener('keydown',e=>{if(e.repeat||document.querySelector('dialog[open]')||/INPUT|SELECT|TEXTAREA/.test(e.target.tagName))return;const key=e.key.toLowerCase();if(['1','2','3'].includes(key)){document.querySelector('[data-speed="'+key+'"]').click();e.preventDefault();}if(key==='p'){$('pause').click();e.preventDefault();}if(key==='r'){$('roar').click();e.preventDefault();}});
  $('enemyGuide').innerHTML=Object.entries(B.enemies).map(([type,e])=>'<article class="enemy-card"><img src="'+images[type]+'" alt=""><strong>'+e.name+'</strong><p>'+e.hint+'</p></article>').join('');
+ // tutorial guiado: só na primeira partida da fase 1, modo normal
+ let tutor=null;
+ function maybeTutor(){if(!window.LuccareTutor||tutor?.alive||profile.tutorial||s.stage!==0||s.adult||s.wave!==0)return;
+  tutor=LuccareTutor({get:()=>({s,selected}),brushArt:images.brush,onSkip:()=>{profile.tutorial=true;persist();}});}
  renderChapters();renderShop();renderPads();renderWave();soundUI();hud(true);persist();if(s.wave===0&&firstVisit(s))showLesson();
  else if(s.wave===0&&!profile.checkpoint)say(intro(s));
+ maybeTutor();
  if(profile.checkpoint)say('Sua defesa voltou à preparação da onda '+(s.wave+1)+'. Escolha quando continuar.');schedule();
 })();
 
